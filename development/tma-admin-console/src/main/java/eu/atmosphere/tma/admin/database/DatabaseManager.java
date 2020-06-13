@@ -31,8 +31,11 @@ public class DatabaseManager {
                     .getConnection("jdbc:mysql://localhost/knowledge?"
                             + "user=root&password=123456");*/
             connection = DriverManager
-                    .getConnection("jdbc:mysql://mysql-0.mysql.default.svc.cluster.local:3306/knowledge?"
-                            + "user=root&password=password");
+                    .getConnection("jdbc:mysql://127.0.0.1:3306/knowledge?"
+                            + "user=root&password=");
+//            connection = DriverManager
+//                    .getConnection("jdbc:mysql://mysql-0.mysql.default.svc.cluster.local:3306/knowledge?"
+//                            + "user=root&password=password");
         } catch (SQLException e) {
             LOGGER.error("[ATMOSPHERE] Error when connecting to the database", e);
         }

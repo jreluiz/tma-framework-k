@@ -12,8 +12,6 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mysql.jdbc.Statement;
-
 public class ActuatorManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ActuatorManager.class);
@@ -24,7 +22,7 @@ public class ActuatorManager {
         byte[] pubKey = getBytesPublicKey(pubKeyPath);
 
         try {
-            ps = DatabaseManager.getConnectionInstance().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps = DatabaseManager.getConnectionInstance().prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, address);
             ps.setString(2, Base64.getEncoder().encodeToString(pubKey));
 
