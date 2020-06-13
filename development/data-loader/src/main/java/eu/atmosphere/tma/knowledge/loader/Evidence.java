@@ -28,13 +28,15 @@ public class Evidence {
     private int probeId;
     private int resourceId;
     private int descriptionId;
+    private int metricId;
     private double time;
     private double value;
 
-    public Evidence(int probeId, int resourceId, int descriptionId, double time, double value) {
+    public Evidence(int probeId, int resourceId, int descriptionId, int metricId, double time, double value) {
         this.probeId = probeId;
         this.resourceId = resourceId;
         this.descriptionId = descriptionId;
+        this.metricId = metricId;
         this.time = time;
         this.value = value;
     }
@@ -50,8 +52,12 @@ public class Evidence {
     public int getDescriptionId() {
         return descriptionId;
     }
+    
+    public int getMetricId() {
+		return metricId;
+	}
 
-    public double getTime() {
+	public double getTime() {
         return time;
     }
 
@@ -71,6 +77,10 @@ public class Evidence {
         this.descriptionId = descriptionId;
     }
 
+	public void setMetricId(int metricId) {
+		this.metricId = metricId;
+	}
+    
     public void setTime(double time) {
         this.time = time;
     }
@@ -79,10 +89,11 @@ public class Evidence {
         this.value = value;
     }
 
-    @Override
-    public String toString() {
-        return "Evidence{probeId=" + probeId + ", resourceId=" + resourceId
-                + ", descriptionId=" + descriptionId + ", time=" + time
-                + ", value=" + value + '}';
-    }
+	@Override
+	public String toString() {
+		return "Evidence [probeId=" + probeId + ", resourceId=" + resourceId + ", descriptionId=" + descriptionId
+				+ ", metricId=" + metricId + ", time=" + time + ", value=" + value + "]";
+	}
+
+
 }

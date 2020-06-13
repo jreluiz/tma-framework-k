@@ -52,7 +52,8 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     private static String TOPIC = "topic-monitor";
-    private static String DB_URL = "jdbc:mysql://mysql-0.mysql.default.svc.cluster.local:3306/knowledge";
+    private static String DB_URL = "jdbc:mysql://localhost:3306/knowledge";
+//    private static String DB_URL = "jdbc:mysql://mysql-0.mysql.default.svc.cluster.local:3306/knowledge";
 
     private static final int KAFKA_CONSUMER_POLL_DURATION = 1000;
 
@@ -127,13 +128,13 @@ public class Main {
 
         try {
             LOGGER.trace("Opening connection");
-            Connection conn = DriverManager.getConnection(DB_URL, "root", "passtobereplaced");
+            Connection conn = DriverManager.getConnection(DB_URL, "root", "");
             LOGGER.debug("Connection opened");
 
             LOGGER.trace("Preparing mysql statement");
             // the mysql insert statement
-            String query = "INSERT INTO Data(probeId, resourceId, descriptionId, valueTime, value) "
-                    + " VALUES (? , ? , ?, FROM_UNIXTIME(?), ?)";
+            String query = "INSERT INTO Data(probeId, resourceId, descriptionId, metricId, valueTime, value) "
+                    + " VALUES (?, ?, ?, ?, FROM_UNIXTIME(?), ?)";
 
             conn.setAutoCommit(false);
 
@@ -143,8 +144,9 @@ public class Main {
             preparedStatement.setInt(1, evidence.getProbeId());
             preparedStatement.setInt(2, evidence.getResourceId());
             preparedStatement.setInt(3, evidence.getDescriptionId());
-            preparedStatement.setDouble(4, evidence.getTime());
-            preparedStatement.setDouble(5, evidence.getValue());
+            preparedStatement.setInt(4, evidence.getMetricId());
+            preparedStatement.setDouble(5, evidence.getTime());
+            preparedStatement.setDouble(6, evidence.getValue());
 
             LOGGER.trace("Executing mysql statement");
             // execute the prepared statement
@@ -182,6 +184,7 @@ public class Main {
             for (int i = 0; i < data.length(); i++) {
                 // unpacking the data
                 int descriptionId = data.getJSONObject(i).getInt("descriptionId");
+                int metricId = data.getJSONObject(i).getInt("metricId");
                 JSONArray observations = data.getJSONObject(i).getJSONArray("observations");
 
                 LOGGER.trace("Data number {} Reading every observation", i);
@@ -190,7 +193,7 @@ public class Main {
                     int time = observations.getJSONObject(j).getInt("time");
                     Double value = observations.getJSONObject(j).getDouble("value");
 
-                    Evidence newEvidence = new Evidence(probeId, resourceId, descriptionId, time, value);
+                    Evidence newEvidence = new Evidence(probeId, resourceId, descriptionId, metricId, time, value);
                     evidences.add(newEvidence);
                 }
             }
