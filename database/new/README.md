@@ -8,12 +8,12 @@ Complete quality metamodel and planner infrastructure
 
 Privacy QM
 
-![Complete quality metamodel to be used in knowledge](https://github.com/jreluiz/tma-framework-k/blob/master/database/new/models/privacy_qm.png)
+![Privacy QM](https://github.com/jreluiz/tma-framework-k/blob/master/database/new/models/privacy_qm.png)
 
 Performance QM
 
-![Complete quality metamodel to be used in knowledge](https://github.com/jreluiz/tma-framework-k/blob/master/database/new/models/performance_qm.png)
+![Performance QM](https://github.com/jreluiz/tma-framework-k/blob/master/database/new/models/performance_qm.png)
 
 Reliability QM
 
-![Complete quality metamodel to be used in knowledge](https://github.com/jreluiz/tma-framework-k/blob/master/database/new/models/reliability_qm.png)
+![Reliability QM](https://github.com/jreluiz/tma-framework-k/blob/master/database/new/models/reliability_qm.png)
